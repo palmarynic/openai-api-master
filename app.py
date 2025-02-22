@@ -26,6 +26,13 @@ def debug_env():
         "OpenAI key": os.getenv("OPENAI_API_KEY"),
         #"All Env Vars": dict(os.environ)  # 這會回傳所有 Vercel 環境變數
     }
+def test_openai():
+    try:
+        client = openai.OpenAI()
+        thread = client.beta.threads.create()
+        return {"thread_id": thread.id}
+    except Exception as e:
+        return {"error": str(e)}
 
 
 # import secrets
