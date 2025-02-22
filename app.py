@@ -26,6 +26,7 @@ def debug_env():
         "OpenAI key": os.getenv("OPENAI_API_KEY"),
         #"All Env Vars": dict(os.environ)  # 這會回傳所有 Vercel 環境變數
     }
+@app.route('/test_openai')
 def test_openai():
     try:
         client = openai.OpenAI()
