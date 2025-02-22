@@ -23,7 +23,8 @@ def debug_env():
     return {
         "Assistant ID": os.getenv("ASSISTANT_ID"),
         "Vector Store ID": os.getenv("VECTOR_STORE_ID"),
-        "All Env Vars": dict(os.environ)  # 這會回傳所有 Vercel 環境變數
+        "OpenAI key": os.getenv("OPENAI_API_KEY"),
+        #"All Env Vars": dict(os.environ)  # 這會回傳所有 Vercel 環境變數
     }
 
 
@@ -90,7 +91,3 @@ if __name__ == '__main__':
 
     # Run the Flask application
     app.run(debug=True)
-
-    print(f"Assistant ID from env: {os.getenv('ASSISTANT_ID')}")
-    print(f"Vector Store ID from env: {os.getenv('VECTOR_STORE_ID')}")
-    print(os.environ)  # 確保這些變數出現在 Vercel 環境中
