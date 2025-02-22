@@ -18,6 +18,15 @@ app.secret_key = os.getenv("SECRET_KEY")  # Load the secret key from the environ
 app.assistant_id = os.getenv("ASSISTANT_ID")
 app.vector_store_id = os.getenv("VECTOR_STORE_ID")
 
+@app.route('/debug_env')
+def debug_env():
+    return {
+        "Assistant ID": os.getenv("ASSISTANT_ID"),
+        "Vector Store ID": os.getenv("VECTOR_STORE_ID"),
+        "All Env Vars": dict(os.environ)  # 這會回傳所有 Vercel 環境變數
+    }
+
+
 # import secrets
 # secret_key = secrets.token_hex(16)  # Generates a 32-character hexadecimal string (128 bits)
 # print(secret_key)
