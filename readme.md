@@ -1,5 +1,7 @@
 # OpenAI API Employee Assistant - Flask Application
 
+This is palmary's opanAI test
+
 This project is a Flask-based web application that integrates OpenAI’s API to create a personal assistant for employees. The assistant can handle queries related to employee benefits, career growth, and other organizational tasks by interacting with an AI model. 
 
 ## Features
