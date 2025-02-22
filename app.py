@@ -74,3 +74,7 @@ if __name__ == '__main__':
 
     # Run the Flask application
     app.run(debug=True)
+
+    print(f"Assistant ID from env: {os.getenv('ASSISTANT_ID')}")
+    print(f"Vector Store ID from env: {os.getenv('VECTOR_STORE_ID')}")
+    print(os.environ)  # 確保這些變數出現在 Vercel 環境中

@@ -6,7 +6,7 @@ class AssistantManager:
 
     assistant_id = None
 
-    def __init__(self, model: str = "gpt-4o-mini"):
+    def __init__(self, model: str = "gpt-4o"):
         self.client = openai
         self.model = model
 
