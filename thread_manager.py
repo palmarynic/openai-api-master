@@ -12,17 +12,24 @@ class ThreadManager:
         self.thread = None
 
     def create_thread(self):
-        if 'thread_id' not in session or not session['thread_id']:
+        try:
             thread_obj = self.client.beta.threads.create()
-            session['thread_id'] = thread_obj.id
-            self.thread = thread_obj
-        else:
-            try:
-                self.thread = self.client.beta.threads.retrieve(thread_id=session['thread_id'])
-            except Exception as e:
-                print(f"Error retrieving thread: {e}")
-                self.thread = self.client.beta.threads.create()
-                session['thread_id'] = self.thread.id
+            self.thread = thread_obj  # 存在物件變數中
+            return self.thread.id  # 直接回傳 thread_id
+        except Exception as e:
+            print(f"Error creating thread: {e}")  # Debug 用
+            return None  # 避免程式崩潰
+        # if 'thread_id' not in session or not session['thread_id']:
+        #     thread_obj = self.client.beta.threads.create()
+        #     session['thread_id'] = thread_obj.id
+        #     self.thread = thread_obj
+        # else:
+        #     try:
+        #         self.thread = self.client.beta.threads.retrieve(thread_id=session['thread_id'])
+        #     except Exception as e:
+        #         print(f"Error retrieving thread: {e}")
+        #         self.thread = self.client.beta.threads.create()
+        #         session['thread_id'] = self.thread.id
 
     def add_message_to_thread(self, role, content):
         if self.thread:
@@ -33,6 +40,7 @@ class ThreadManager:
             run = self.client.beta.threads.runs.create_and_poll(
                 thread_id=self.thread.id,
                 assistant_id=assistant_id,
+                instructions=instructions
             )
             # run = self.client.beta.threads.runs.create(thread_id=self.thread.id, assistant_id=assistant_id, instructions=instructions)
             # return run

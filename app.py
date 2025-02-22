@@ -41,10 +41,17 @@ def index():
 def assist():
     data = request.get_json()
     query = data.get('query')
-
-    # Create or retrieve the user's thread
+    #thread_id = data.get('thread_id')
     thread_manager = ThreadManager()
-    thread_manager.create_thread()
+    thread_id = thread_manager.create_thread()
+    if not thread_id:
+        return jsonify({"error": "Failed to create thread"}), 500  # 回傳錯誤
+    # Create or retrieve the user's thread
+    # thread_manager = ThreadManager()
+    # if thread_id:
+    #     thread_manager.thread = thread_manager.client.beta.threads.retrieve(thread_id=thread_id)
+    # else:
+    # thread_manager.create_thread()
 
     # 記錄 session 與 thread_id
     #logging.info(f" Thread ID: {session.get('thread_id')}")
@@ -64,7 +71,7 @@ def assist():
     # create summary
     # return summary
 
-    return jsonify({'summary': summary})
+    return jsonify({'summary': summary, 'thread_id': thread_manager.thread.id})
 
 if __name__ == '__main__':
 
